@@ -1,0 +1,511 @@
+-- // Boot Library \\ --
+
+local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
+
+-- // Functions & Values \\ --
+
+local colors = {
+
+    SchemeColor = Color3.fromRGB(80,0,0),
+
+    Background = Color3.fromRGB(188,0,0),
+
+    Header = Color3.fromRGB(110, 0, 0),
+
+    TextColor = Color3.fromRGB(255,255,255),
+
+    ElementColor = Color3.fromRGB(110, 0, 0)
+
+}
+
+crystals = {}
+
+for _, v in pairs(game:GetService("Workspace").mapCrystalsFolder:GetChildren()) do
+
+    table.insert(crystals, v.Name)
+
+end
+
+local Islands = {}
+
+for _, v in next, game.workspace.islandUnlockParts:GetChildren() do
+
+    if v then
+
+        table.insert(Islands, v.Name)
+
+    end
+
+end
+
+-- // Creating Window \\ --
+
+local Window = Library.CreateLib("Blood Hub | Ninja Legends", colors)
+
+-- // Define Tabs \\ --
+
+local Tab1 = Window:NewTab("Auto Farm")
+
+local Tab2 = Window:NewTab("Islands")
+
+local Tab3 = Window:NewTab("Crystals")
+
+local Tab4 = Window:NewTab("Player & Game")
+
+-- // Define Tab1 \\ --
+
+local Section1 = Tab1:NewSection("Auto Farms")
+
+Section1:NewToggle("Auto Swing", " ", function(state)
+
+    if state then
+
+           _G.loop = true
+
+           while _G.loop == true do wait()
+
+                 task.wait()
+
+            game:GetService("Players").LocalPlayer.ninjaEvent:FireServer("swingKatana")
+
+           end
+
+        else
+
+           _G.loop = false
+
+        end
+
+end)
+
+Section1:NewToggle("Auto Sell", " ", function(state)
+
+    if state then
+
+           _G.loop = true
+
+           while _G.loop == true do wait()
+
+                             task.wait(.01)
+
+            if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+
+                game.workspace.sellAreaCircles["sellAreaCircle7"].circleInner.CFrame = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
+
+                wait(.1)
+
+                game.workspace.sellAreaCircles["sellAreaCircle7"].circleInner.CFrame = game.Workspace.Part.CFrame
+
+            end
+
+           end
+
+        else
+
+           _G.loop = false
+
+        end
+
+end)
+
+Section1:NewToggle("Auto Max Sell", " ", function(state)
+
+		if state then           _G.loop = true
+
+           while _G.loop == true do wait()
+
+                             task.wait()
+
+            if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+
+                if game.Players.LocalPlayer.PlayerGui.gameGui.maxNinjitsuMenu.Visible == true then
+
+                    game.workspace.sellAreaCircles["sellAreaCircle7"].circleInner.CFrame = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
+
+                    task.wait()
+
+                    game.workspace.sellAreaCircles["sellAreaCircle7"].circleInner.CFrame = game.Workspace.Part.CFrame
+
+                end
+
+            end
+
+           end
+
+        else
+
+           _G.loop = false
+
+        end
+
+end)
+
+Section1:NewToggle("Auto Buy Katana", " ", function(state)
+
+		if state then
+
+           _G.loop = true
+
+           while _G.loop == true do wait()
+
+                 task.wait()
+
+            if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+
+                local oh1 = "buyAllSwords"
+
+                local oh2 = {"Ground", "Astral Island", "Space Island", "Tundra Island", "Eternal Island", "Sandstorm", "Thunderstorm", "Ancient Inferno Island", "Midnight Shadow Island", "Mythical Souls Island", "Winter Wonder Island"}
+
+                for i = 1, #oh2 do
+
+                    game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+
+                end
+
+            end
+
+           end
+
+        else
+
+           _G.loop = false
+
+        end
+
+end)
+
+Section1:NewToggle("Auto Buy Belts", " ", function(state)
+
+		if state then
+
+           _G.loop = true
+
+           while _G.loop == true do wait()
+
+                task.wait()
+
+            if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+
+                local oh1 = "buyAllBelts"
+
+                local oh2 = {"Ground", "Astral Island", "Space Island", "Tundra Island", "Eternal Island", "Sandstorm", "Thunderstorm", "Ancient Inferno Island", "Midnight Shadow Island", "Mythical Souls Island", "Winter Wonder Island"}
+
+                for i = 1, #oh2 do
+
+                    game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i])
+
+                end
+
+            end 
+
+           end
+
+        else
+
+           _G.loop = false
+
+        end
+
+end)
+
+Section1:NewToggle("Auto Buy Ranks", " ", function(state)
+
+		if state then
+
+           _G.loop = true
+
+           while _G.loop == true do wait()
+
+                 task.wait()
+
+            if game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart") then
+
+                local oh1 = "buyRank"
+
+                local oh2 = game:GetService("ReplicatedStorage").Ranks.Ground:GetChildren()
+
+                for i = 1, #oh2 do
+
+                    game:GetService("Players").LocalPlayer.ninjaEvent:FireServer(oh1, oh2[i].Name)
+
+                end
+
+            end
+
+           end
+
+        else
+
+           _G.loop = false
+
+        end
+
+end)
+
+local Section2 = Tab1:NewSection("Extra")
+
+Section2:NewButton("Unlock All Elements", " ", function()
+
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Frost")
+
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Inferno")
+
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Lightning")
+
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Electral Chaos")
+
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Masterful Wrath")
+
+        game.ReplicatedStorage.rEvents.elementMasteryEvent:FireServer("Shadow Charge")
+
+end)
+
+Section2:NewButton("Collect All Chests", " ", function()
+
+        game:GetService("Workspace").mythicalChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").goldenChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").enchantedChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").magmaChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").legendsChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").eternalChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").saharaChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").thunderChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").ancientChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").midnightShadowChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").groupRewardsCircle["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace")["Daily Chest"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace")["wonderChest"].circleInner.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(3.5)
+
+        game:GetService("Workspace").wonderChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        game:GetService("Workspace").midnightShadowChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        game:GetService("Workspace").ancientChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace").midnightShadowChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace").thunderChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace").saharaChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace").eternalChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace").legendsChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace").magmaChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace").enchantedChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace").goldenChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace").mythicalChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace").groupRewardsCircle["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+        game:GetService("Workspace")["Daily Chest"].circleInner.CFrame = game.Workspace.Part.CFrame  
+
+end)
+
+Section2:NewButton("Collect Light Chest", " ", function()
+
+        game:GetService("Workspace").lightKarmaChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(5)
+
+        game:GetService("Workspace").lightKarmaChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+end)
+
+Section2:NewButton("Collect Evil Chest", " ", function()
+
+        game:GetService("Workspace").evilKarmaChest["circleInner"].CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+
+        wait(5)
+
+        game:GetService("Workspace").evilKarmaChest["circleInner"].CFrame = game.Workspace.Part.CFrame
+
+end)
+
+-- // Define Tab3 \\ --
+
+local Section3 = Tab2:NewSection("Islands")
+
+Section3:NewButton("Unlock All Islands", " ", function()
+
+        for _, v in next, game.workspace.islandUnlockParts:GetChildren() do
+
+            if v then
+
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.islandSignPart.CFrame
+
+                wait(.5)
+
+            end
+
+        end
+
+end)
+
+Section3:NewDropdown("Select Island", " ", Islands, function(selected)
+
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.islandUnlockParts[selected].islandSignPart.CFrame
+
+end)
+
+-- // Define Tab3 \\ --
+
+local Section4 = Tab3:NewSection("Crystals")
+
+Section4:NewDropdown("Select Crystal", " ", crystals, function(selected)
+
+        crystal = selected
+
+end)
+
+Section4:NewToggle("Auto Open Crystal", " ", function(state)
+
+    if state then
+
+           _G.loop = true
+
+           while _G.loop == true do wait()
+
+               game:GetService("ReplicatedStorage").rEvents.openCrystalRemote:InvokeServer("openCrystal", crystal)
+
+           end
+
+        else
+
+           _G.loop = false
+
+        end
+
+end)
+
+local Section5 = Tab3:NewSection("Extra")
+
+Section5:NewToggle("Auto Evolve Pets", " ",function(state)
+
+if state then
+
+           _G.loop = true
+
+           while _G.loop == true do wait()
+
+              local args = {
+
+    [1] = "autoEvolvePets"
+
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("rEvents"):WaitForChild("autoEvolveRemote"):InvokeServer(unpack(args))
+
+           end
+
+        else
+
+           _G.loop = false
+
+        end
+
+end)
+
+-- // Define Tab4 \\ --
+
+local Section6 = Tab4:NewSection("Player")
+
+Section6:NewTextBox("Walk Speed","",function(pws)
+
+   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = pws
+
+end)
+
+Section6:NewTextBox("Jump Power","",function(pjp)
+
+   game.Players.LocalPlayer.Character.Humanoid.JumpPower = pjp
+
+end)
+
+Section6:NewTextBox("Hip Height","",function(phh)
+
+   game.Players.LocalPlayer.Character.Humanoid.HipHeight = phh     
+
+end)
+
+Section6:NewTextBox("Gravity","",function(pg)
+
+   game.Workspace.Gravity = pg  
+
+end)
+
+local Section7 = Tab4:NewSection("Game")
+
+Section7:NewButton("Anti Kick", " ", function()
+
+    loadstring(game:HttpGet("https://pastebin.com/raw/FPfaukXN"))()
+
+end)
+
+Section7:NewButton("Low Graphics", " ", function()
+
+    loadstring(game:HttpGet("https://pastebin.com/raw/8QZGBLW8"))()
+
+end)
+
+Section7:NewButton("RTX", " ",  function()
+
+    loadstring(game:HttpGet("https://pastebin.com/raw/vmjZ4UY8"))()
+
+end)
+
+local Section8 = Tab4:NewSection("Credits")
+
+Section8:NewButton("!  >Dialz.#4528", " ",  function()
+
+    setclipboard("!  >Dialz.#4528")
+
+end)
+
+Section8:NewButton("ThatGlitches#0676", " ",  function()
+
+    setclipboard("ThatGlitches#0676")
+
+end)
